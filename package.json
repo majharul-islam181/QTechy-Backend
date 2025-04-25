@@ -1,7 +1,6 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "type": "module",
   "description": "Simple Node.js backend with auth and product list",
   "main": "src/app.js",
   "scripts": {
