@@ -18,6 +18,10 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 
+app.get('/', (req, res) => {
+  res.send('🚀 Welcome to qtechy Server (Vercel-ready)');
+});
+
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
