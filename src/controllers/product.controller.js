@@ -31,12 +31,12 @@ const createProduct = async (req, res) => {
 // Get all products with pagination, search, sort
 const getProducts = async (req, res) => {
   try {
-    const { page = 1, limit = 10, search = "", sortBy = "createdAt", sortOrder = "desc" } = req.query;
+    const { search = "", sortBy = "createdAt", sortOrder = "desc" } = req.query;
 
     const query = {};
 
     if (search) {
-      query.name = { $regex: search, $options: "i" }; 
+      query.name = { $regex: search, $options: "i" };
     }
 
     const sortOptions = {};
@@ -46,21 +46,14 @@ const getProducts = async (req, res) => {
     } else if (sortBy === "rating") {
       sortOptions.rating = sortOrder === "asc" ? 1 : -1;
     } else {
-      sortOptions.createdAt = sortOrder === "asc" ? 1 : -1; 
+      sortOptions.createdAt = sortOrder === "asc" ? 1 : -1;
     }
 
-    const products = await Product.find(query)
-      .sort(sortOptions)
-      .skip((page - 1) * limit)
-      .limit(Number(limit));
-
-    const total = await Product.countDocuments(query);
+    const products = await Product.find(query).sort(sortOptions);
 
     res.json({
       products,
-      total,
-      page: Number(page),
-      pages: Math.ceil(total / limit),
+      total: products.length,
     });
   } catch (error) {
     console.error(error);
