@@ -20,10 +20,10 @@ app.use('/api/products', productRoutes);
 
 app.get('/', (req, res) => {
   res.send('🚀 Welcome to qtechy Server (Vercel-ready)');
-});
+});  
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URL)
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log('MongoDB connection error:', err));
 
