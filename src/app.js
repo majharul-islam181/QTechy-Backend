@@ -14,13 +14,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send('🚀 Welcome to qtechy Server (Vercel-ready)');
+});  
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 
-app.get('/', (req, res) => {
-  res.send('🚀 Welcome to qtechy Server (Vercel-ready)');
-});  
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URL)
